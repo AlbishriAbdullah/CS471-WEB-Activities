@@ -1,0 +1,14 @@
+{% extends "bookmodule/layouts/base.html" %}
+{% load static %}
+{% block title %} List of books {% endblock title %}
+{% block content %}
+<h1>List of books </h1>
+<a href="{% url "books.one_book" 1 %}"><h2>Modern Software Engineering</h2></a>
+<a href="{% url "books.one_book" 1 %}"><img src="{% static 'book1.jpg' %}" alt="Book1 img desc" width="200" height="200"></a>
+<hr>
+<h2>2) Java</h2>
+<img src="{% static 'book2.jpg' %}" alt="Book2 img desc" width="200" height="200">
+<hr>
+<h2>3) System Programming in Linux</h2>
+<img src="{% static 'book3.jpg' %}" alt="Book3 img desc" width="200" height="200">
+{% endblock content %}

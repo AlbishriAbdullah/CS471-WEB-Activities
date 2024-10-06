@@ -1,0 +1,12 @@
+{% extends "bookmodule/layouts/base.html" %}
+{% load static %}
+{% block title %} show one book {% endblock title %}
+{% block content %}
+<h1>List of books </h1>
+<a href="{% url "books.list_books" %}">Go Back</a>
+<h1>Details of Book1</h1>
+<h2>Modern Software Engineering</h2>
+<h2>Author: David Farley</h2>
+<p><strong> Software Engineering: </strong> Your Creativity, Effectiveness, and Ultimately, Your Code In Modern Software Engineering. </p>
+<img src="{% static 'book1.jpg' %}" alt="Book1 img desc" width="200" height="200">
+{% endblock content %}
