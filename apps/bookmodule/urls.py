@@ -10,4 +10,7 @@ urlpatterns = [
     path('<int:bookId>/', views.viewbook, name="books.one_book"), # here i think we must check the name
     path('aboutus/', views.aboutus, name="books.aboutus"), #
     path('search/',views.search, name='books.search'),
+    path('booklist/', views.book_list, name='book_list'),
+    path('query/',views.simple_query,name='books.query'), # task 3
+    path('complexQuery/',views.complex_query,name='books.complexQuery'),
 ]

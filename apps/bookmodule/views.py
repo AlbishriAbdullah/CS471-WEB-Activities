@@ -58,3 +58,28 @@ def __getBooksList():
     book2 = {'id':56788765,'title':'Reversing: Secrets of Reverse Engineering', 'author':'E. Eilam'}
     book3 = {'id':43211234, 'title':'The Hundred-Page Machine Learning Book', 'author':'Andriy Burkov'}
     return [book1, book2, book3]
+
+from .models import Book
+
+# insert new data to the database using create function
+mybook = Book.objects.create(title = 'Cybersecurity', author = 'Nelson', price = 20.4, edition = 2)
+mybook2 = Book.objects.create(title = 'Medicine ', price = 90.99, author = 'M. Jackson', edition = 5)
+mybook.save()
+
+# to list all books in the database
+def book_list(request):
+    books = Book.objects.all()
+    return render(request, 'bookmodule/booklist.html', {'books': books})
+
+# task 3 lab 7
+def simple_query(request):
+    mybooks=Book.objects.filter(title__icontains='and') # <- multiple objects
+    return render(request, 'bookmodule/bookList.html', {'books':mybooks})
+
+#task 4 lab 7
+def complex_query(request):
+    mybooks=books=Book.objects.filter(author__isnull = False).filter(title__icontains='and').filter(edition__gte = 2).exclude(price__lte = 100)[:10]
+    if len(mybooks)>=1:
+        return render(request, 'bookmodule/bookList.html', {'books':mybooks})
+    else:
+        return render(request, 'bookmodule/index.html')
