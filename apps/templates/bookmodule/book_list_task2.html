@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books with Edition > 2 and 'qu' in Title or Author</title>
+</head>
+<body>
+    <h1>books with edition higher than 2 and 'qu' in title or author</h1>
+    <ul>
+        {% for book in books %}
+        <li><strong>Title:</strong> {{ book.title }} <br>
+            <strong>Author:</strong> {{ book.author }} <br>
+            <strong>Edition:</strong> {{ book.edition }}</li>
+    {% empty %}
+        <p>No books match the criteria.</p>
+    {% endfor %}
+    </ul>
+    
+</body>
+</html>

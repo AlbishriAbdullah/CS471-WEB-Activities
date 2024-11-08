@@ -60,6 +60,7 @@ def __getBooksList():
     return [book1, book2, book3]
 
 from .models import Book
+from django.db.models import Q
 
 # insert new data to the database using create function
 mybook = Book.objects.create(title = 'Cybersecurity', author = 'Nelson', price = 20.4, edition = 2)
@@ -83,3 +84,36 @@ def complex_query(request):
         return render(request, 'bookmodule/bookList.html', {'books':mybooks})
     else:
         return render(request, 'bookmodule/index.html')
+    
+# lab 8 task1
+# bookmodule/views.py
+def book_list_task1(request):
+    books = Book.objects.filter(Q(price__lte=50))
+    return render(request, 'bookmodule/book_list_task1.html', {'books': books})
+
+def book_list_task2(request):
+    books = Book.objects.filter(  Q(edition__gt=2) &  (Q(title__icontains='qu') | Q(author__icontains='qu')) )
+    return render(request,'bookmodule/book_list_task2.html', {'books' : books})
+
+def book_list_task3(request):
+    books = Book.objects.filter(Q(edition__lte=2) & ~ (Q(title__icontains='qu') | Q(author__icontains='qu')))
+    return render(request,'bookmodule/book_list_task3.html', {'books' : books})
+
+def book_list_task4(request):
+    books = Book.objects.order_by('title')
+    return render(request,'bookmodule/book_list_task4.html',{'books' : books})
+
+# lab 8 task 5
+from django.db.models import Count, Sum, Avg, Max, Min
+
+def book_statistics(request):
+    # Aggregate data
+    stats = Book.objects.aggregate(
+        total_books=Count('id'),
+        total_price=Sum('price'),
+        average_price=Avg('price'),
+        max_price=Max('price'),
+        min_price=Min('price')
+    )
+    
+    return render(request, 'bookmodule/book_statistics.html', {'stats': stats})

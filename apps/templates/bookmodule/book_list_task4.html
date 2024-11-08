@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <h1>list books and order by their titles using the function “order_by”</h1>
+    </title>
+</head>
+<body>
+    <h1>list books by their titles using the function “order_by”</h1>
+    <ul>
+        {% for book in books %}
+            <li><strong>Title:</strong> {{ book.title }} <br>
+                <strong>Author:</strong> {{ book.author }} <br>
+                <strong>Edition:</strong> {{ book.edition }}</li>
+        {% empty %}
+            <p>No books available.</p>
+        {% endfor %}
+    </ul>
+    
+</body>
+</html>
