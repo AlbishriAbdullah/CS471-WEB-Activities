@@ -105,7 +105,7 @@ def book_list_task4(request):
 
 # lab 8 task 5
 from django.db.models import Count, Sum, Avg, Max, Min
-
+# lab 8 task 6
 def book_statistics(request):
     # Aggregate data
     stats = Book.objects.aggregate(
@@ -117,3 +117,23 @@ def book_statistics(request):
     )
     
     return render(request, 'bookmodule/book_statistics.html', {'stats': stats})
+# lab 8 task 6
+from .models import Student, Address
+
+address1 = Address.objects.create(street='High Way',city='Dammam',postal_code='432123')
+address2 = Address.objects.create(street='King Fahad St',city='Dammam',postal_code='65756')
+address3 = Address.objects.create(street='main Street',city='Khobar',postal_code='56757')
+
+student1 = Student.objects.create(name='Salman',age=24,address = address1)
+student2 = Student.objects.create(name='Abdulrhman',age=23,address=address2)
+student3 = Student.objects.create(name='Rayan',age=19,address=address3)
+
+# lab 8 task 9
+def students_by_city(request):
+    city_counts = (
+        Student.objects.values('address__city')
+        .annotate(student_count=Count('id'))    
+        .order_by('address__city')            
+    )
+    
+    return render(request, 'bookmodule/students_by_city.html', {'city_counts': city_counts})

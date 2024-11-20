@@ -18,4 +18,5 @@ urlpatterns = [
     path('book_list_task3/',views.book_list_task3,name='books.book_list_task3'),
     path('book_list_task4/',views.book_list_task4,name='books.book_list_task4'),
     path('book_statistics/',views.book_statistics,name='books.book_statistics'),
+    path('students_by_city/',views.students_by_city, name='books.students_by_city'),
 ]
