@@ -128,7 +128,7 @@ student1 = Student.objects.create(name='Salman',age=24,address = address1)
 student2 = Student.objects.create(name='Abdulrhman',age=23,address=address2)
 student3 = Student.objects.create(name='Rayan',age=19,address=address3)
 
-# lab 8 task 9
+# lab 8 task 7
 def students_by_city(request):
     city_counts = (
         Student.objects.values('address__city')
@@ -137,3 +137,12 @@ def students_by_city(request):
     )
     
     return render(request, 'bookmodule/students_by_city.html', {'city_counts': city_counts})
+# lab 5
+def lab5_task1(request):
+    return render(request, 'bookmodule/lab5_task1.html')
+
+def lab5_task2(request):
+    return render(request,'bookmodule/lab5_task2_3.html')
+
+def lab5_task4(request):
+    return render(request,'bookmodule/lab5_task4.html')
