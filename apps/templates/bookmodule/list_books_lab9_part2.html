@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book List (Part 2)</title>
+</head>
+<body>
+    <h1>Book List</h1>
+    <a href="{% url 'books.add_book_part2' %}">Add New Book</a>
+    <ol>
+        {% for book in books %}
+            <li>
+                <strong>Title:</strong> {{ book.title }} <br>
+                <strong>Author:</strong> {{ book.author }} <br>
+                <strong>Price:</strong> ${{ book.price }} <br>
+                <strong>Edition:</strong> {{ book.edition }} <br>
+                <a href="{% url 'books.edit_book_part2' book.id %}">Edit</a>
+                <a href="{% url 'books.delete_book_part2' book.id %}">Delete</a>
+            </li>
+            <hr>
+        {% endfor %}
+    </ol>
+</body>
+</html>
