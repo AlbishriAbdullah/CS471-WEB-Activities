@@ -120,13 +120,13 @@ def book_statistics(request):
 # lab 8 task 6
 from .models import Student, Address
 
-address1 = Address.objects.create(street='High Way',city='Dammam',postal_code='432123')
+""" address1 = Address.objects.create(street='High Way',city='Dammam',postal_code='432123')
 address2 = Address.objects.create(street='King Fahad St',city='Dammam',postal_code='65756')
 address3 = Address.objects.create(street='main Street',city='Khobar',postal_code='56757')
 
 student1 = Student.objects.create(name='Salman',age=24,address = address1)
 student2 = Student.objects.create(name='Abdulrhman',age=23,address=address2)
-student3 = Student.objects.create(name='Rayan',age=19,address=address3)
+student3 = Student.objects.create(name='Rayan',age=19,address=address3) """
 
 # lab 8 task 7
 def students_by_city(request):
@@ -219,5 +219,98 @@ def delete_book_form(request, id):
         return HttpResponseRedirect('/books/list_books_lab9_part2/')
     return render(request, 'bookmodule/delete_book_lab9_part2.html', {'book': book})
 
+# lab 10 task 1
+from .models import Student
+
+def list_students(request):
+    students = Student.objects.all()  # Fetch all students from the database
+    return render(request, 'bookmodule/list_students.html', {'students': students})
+
+
+from .forms import StudentForm
+from django.shortcuts import redirect
+
+def add_student(request):
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
+        if form.is_valid():  
+            form.save()  
+            return redirect('students.list_students')  
+    else:
+        form = StudentForm()  
+    return render(request, 'bookmodule/add_student.html', {'form': form})
+
+def edit_student(request, id):
+    student = get_object_or_404(Student, id=id) 
+    if request.method == 'POST':
+        form = StudentForm(request.POST, instance=student)
+        if form.is_valid():  
+            form.save() 
+            return redirect('students.list_students')  
+    else:
+        form = StudentForm(instance=student)  
+    return render(request, 'bookmodule/edit_student.html', {'form': form})
+
+def delete_student(request, id):
+    student = get_object_or_404(Student, id=id)  
+    if request.method == 'POST':  
+        student.delete()
+        return redirect('students.list_students')  
+    return render(request, 'bookmodule/delete_student.html', {'student': student})
+
+
+# lab 10 task 2
+from .models import Student2
+from .forms import Student2Form
+def list_students2(request):
+    students = Student2.objects.all()
+    return render(request, 'bookmodule/list_students2.html', {'students': students})
+
+def add_student2(request):
+    if request.method == 'POST':
+        form = Student2Form(request.POST)
+        if form.is_valid():
+            form.save()  
+            return redirect('students2.list_students2')
+    else:
+        form = Student2Form()
+    return render(request, 'bookmodule/add_student2.html', {'form': form})
+
+def edit_student2(request, id):
+    student = get_object_or_404(Student2, id=id)
+    if request.method == 'POST':
+        form = Student2Form(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            return redirect('students2.list_students2')
+    else:
+        form = Student2Form(instance=student)
+    return render(request, 'bookmodule/edit_student2.html', {'form': form})
+
+def delete_student2(request, id):
+    student = get_object_or_404(Student2, id=id)
+    if request.method == 'POST':
+        student.delete()
+        return redirect('students2.list_students2')
+    return render(request, 'bookmodule/delete_student2.html', {'student': student})
+
+
+# lab 10 task 3
+from .forms import ProductForm
+from .models import Product
+
+def add_product(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('list_products')
+    else:
+        form = ProductForm()
+    return render(request, 'bookmodule/add_product.html', {'form': form})
+
+def list_products(request):
+    products = Product.objects.all()
+    return render(request, 'bookmodule/list_products.html', {'products': products})
 
 

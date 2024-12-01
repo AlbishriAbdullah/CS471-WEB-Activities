@@ -92,3 +92,6 @@ STATICFILES_DIRS = [( os.path.join(BASE_DIR, "apps/static"))] # I added this lin
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# Media files settings
+MEDIA_URL = '/media/'  # URL to access media files
+MEDIA_ROOT = BASE_DIR / 'media'  # Path to save uploaded files
